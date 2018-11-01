@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "stockforma.h"
 #include "mainmenuforma.h"
+#include "exitforma.h"
 
 namespace Ui {
 class MainWindow;
@@ -24,6 +25,7 @@ private:
     Ui::MainWindow *ui;
     StockForma *stockForma;
     MainMenuForma *mainMenuForma;
+    ExitForma *exitForma;
 };
 
 #endif // MAINWINDOW_H

@@ -21,6 +21,8 @@ signals:
 private slots:
     void on_pushButtonStock_clicked();
 
+    void on_pushButtonExit_clicked();
+
 private:
     Ui::MainMenuForma *ui;
 };

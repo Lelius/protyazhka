@@ -17,3 +17,8 @@ void MainMenuForma::on_pushButtonStock_clicked()
 {
     emit signalChangeStackWidget(1);
 }
+
+void MainMenuForma::on_pushButtonExit_clicked()
+{
+    emit signalChangeStackWidget(2);
+}

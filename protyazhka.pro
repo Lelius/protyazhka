@@ -28,17 +28,20 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     stockforma.cpp \
-    mainmenuforma.cpp
+    mainmenuforma.cpp \
+    exitforma.cpp
 
 HEADERS += \
         mainwindow.h \
     stockforma.h \
-    mainmenuforma.h
+    mainmenuforma.h \
+    exitforma.h
 
 FORMS += \
         mainwindow.ui \
     stockforma.ui \
-    mainmenuforma.ui
+    mainmenuforma.ui \
+    exitforma.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
