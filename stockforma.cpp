@@ -10,34 +10,53 @@ StockForma::StockForma(QWidget *parent) :
 
     //Нет файла базы? Создаём.
     fileNameDataBase = "stock.db";
-    fileDataBase.setFileName(fileNameDataBase);
-    if (!fileDataBase.exists()) {
-        fileDataBase.open(QIODevice::WriteOnly);
-        fileDataBase.close();
+    QFile *fileDataBase = new QFile();
+    fileDataBase->setFileName(fileNameDataBase);
+    if (!fileDataBase->exists()) {
+        fileDataBase->open(QIODevice::WriteOnly);
+        fileDataBase->close();
     }
 
     //Проверяем наличие таблиц в файле БД. Нет? Создаём.
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(fileNameDataBase);
-    if (!db.open()) {
-        qDebug() << db.lastError().text();
+    QSqlDatabase *db = new QSqlDatabase();
+    *db = QSqlDatabase::addDatabase("QSQLITE");
+    db->setDatabaseName(fileNameDataBase);
+    if (!db->open()) {
+        qDebug() << db->lastError().text();
         qDebug() << "Open? No!";
     }
-    QSqlQuery query;
-    if (!query.exec("SELECT * FROM Stock;")) {
+    QSqlQuery *query = new QSqlQuery();
+    if (!query->exec("SELECT * FROM Stock;")) {
         qDebug() << "DB Stock? No!";
-        query.exec("CREATE TABLE Stock (№ INTEGER PRIMARY KEY NOT NULL, Тип VARCHAR(4), Размер VARCHAR(5), Количество VARCHAR(5), Метраж VARCHAR(8), Изменили VARCHAR(8));");
+        query->exec("CREATE TABLE Stock (Номер , Тип , Размер , Количество , Метраж , Изменили );");
     }
-    if (query.exec("SELECT * FROM Stock;")) {
+    if (query->exec("SELECT * FROM Stock;")) {
         qDebug() << "DB Stock? Yes!";
     }
-    if (!query.exec("SELECT * FROM RateStock;")) {
+    if (!query->exec("SELECT * FROM RateStock;")) {
         qDebug() << "DB RateStock? No!";
-        query.exec("CREATE TABLE RateStock (№ INTEGER PRIMARY KEY NOT NULL, Тип VARCHAR(4), Расценка VARCHAR(10), Изменили VARCHAR(8));");
+        query->exec("CREATE TABLE RateStock (Номер , Тип , Расценка , Изменили );");
     }
-    if (query.exec("SELECT * FROM RateStock;")) {
+    if (query->exec("SELECT * FROM RateStock;")) {
         qDebug() << "DB RateStock? Yes!";
     }
+
+    query->exec("INSERT INTO Stock (Номер, Тип, Размер, Количество, Метраж, Изменили) VALUES ('1', 'А38', '6.02', '4', '24.08', '02.11.18');");
+    if (query->lastError().isValid()) {
+        qDebug() << query->lastError();
+        qDebug() << "Insert not worked!";
+    } else {
+        qDebug() << "Insert worked!";
+    }
+
+    //Выводим нередактируемую таблицу Stock в tableViewStock
+    QSqlQueryModel *querymodel = new QSqlQueryModel();
+    querymodel->setQuery("SELECT * From Stock;");
+    if (querymodel->lastError().isValid()){
+        qDebug() << querymodel->lastError();
+    }
+    ui->tableViewStock->setModel(querymodel);
+    ui->tableViewStock->show();
 }
 
 StockForma::~StockForma()

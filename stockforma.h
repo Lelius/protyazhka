@@ -28,8 +28,6 @@ private slots:
 private:
     Ui::StockForma *ui;
     QString fileNameDataBase;
-    QFile fileDataBase;
-    QSqlDatabase db;
 };
 
 #endif // STOCKFORMA_H
