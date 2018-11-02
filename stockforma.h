@@ -2,6 +2,8 @@
 #define STOCKFORMA_H
 
 #include <QWidget>
+#include <QFile>
+#include <QDir>
 
 namespace Ui {
 class StockForma;
@@ -23,6 +25,8 @@ private slots:
 
 private:
     Ui::StockForma *ui;
+    QString fileNameDataBase;
+    QFile fileDataBase;
 };
 
 #endif // STOCKFORMA_H
