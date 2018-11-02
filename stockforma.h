@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QFile>
 #include <QDir>
+#include <QtSql>
+#include <QDebug>
 
 namespace Ui {
 class StockForma;
@@ -27,6 +29,7 @@ private:
     Ui::StockForma *ui;
     QString fileNameDataBase;
     QFile fileDataBase;
+    QSqlDatabase db;
 };
 
 #endif // STOCKFORMA_H
