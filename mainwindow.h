@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QDesktopWidget>
+#include <QApplication>
+
 #include "stockforma.h"
 #include "mainmenuforma.h"
 #include "exitforma.h"

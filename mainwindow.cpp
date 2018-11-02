@@ -7,10 +7,17 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //Делаем окно в два раза меньше разрешения рабочего стола
+    QDesktopWidget *desktop = QApplication::desktop();
+    QRect rect = desktop->screenGeometry(desktop->primaryScreen());
+    MainWindow::resize(rect.width()/2, rect.height()/2);
+
+    //Инициализируем виджеты-формы для QStackedWidget
     stockForma = new StockForma();
     mainMenuForma = new MainMenuForma();
     exitForma = new ExitForma();
 
+    //Назначаем индексы страниц для QStackedWidget
     ui->stackedWidget->insertWidget(0, mainMenuForma);
     ui->stackedWidget->insertWidget(1, stockForma);
     ui->stackedWidget->insertWidget(2, exitForma);
