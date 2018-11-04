@@ -1,6 +1,7 @@
 #include "stockforma.h"
 #include "ui_stockforma.h"
 #include "mainwindow.h"
+#include "myqsqlquerymodel.h"
 
 StockForma::StockForma(QWidget *parent) :
     QWidget(parent),
@@ -41,7 +42,7 @@ StockForma::StockForma(QWidget *parent) :
         qDebug() << "DB RateStock? Yes!";
     }
 
-    query->exec("INSERT INTO Stock (Номер, Тип, Размер, Количество, Метраж, Изменили) VALUES ('1', 'А38', '6.02', '4', '24.08', '02.11.18');");
+    query->exec("INSERT INTO Stock (Номер, Тип, Размер, Количество, Метраж, Изменили) VALUES ('537', 'Б16', '4.35', '87', '378.45', '04.11.18');");
     if (query->lastError().isValid()) {
         qDebug() << query->lastError();
         qDebug() << "Insert not worked!";
@@ -50,7 +51,7 @@ StockForma::StockForma(QWidget *parent) :
     }
 
     //Выводим нередактируемую таблицу Stock в tableViewStock
-    QSqlQueryModel *querymodel = new QSqlQueryModel(this);
+    MyQSqlQueryModel *querymodel = new MyQSqlQueryModel();
     querymodel->setQuery("SELECT * From Stock;");
     if (querymodel->lastError().isValid()){
         qDebug() << querymodel->lastError();

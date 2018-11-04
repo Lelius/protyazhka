@@ -29,13 +29,15 @@ SOURCES += \
         mainwindow.cpp \
     stockforma.cpp \
     mainmenuforma.cpp \
-    exitforma.cpp
+    exitforma.cpp \
+    myqsqlquerymodel.cpp
 
 HEADERS += \
         mainwindow.h \
     stockforma.h \
     mainmenuforma.h \
-    exitforma.h
+    exitforma.h \
+    myqsqlquerymodel.h
 
 FORMS += \
         mainwindow.ui \
