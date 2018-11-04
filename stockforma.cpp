@@ -10,7 +10,7 @@ StockForma::StockForma(QWidget *parent) :
 
     //Нет файла базы? Создаём.
     fileNameDataBase = "stock.db";
-    QFile *fileDataBase = new QFile();
+    QFile *fileDataBase = new QFile(this);
     fileDataBase->setFileName(fileNameDataBase);
     if (!fileDataBase->exists()) {
         fileDataBase->open(QIODevice::WriteOnly);
@@ -50,12 +50,14 @@ StockForma::StockForma(QWidget *parent) :
     }
 
     //Выводим нередактируемую таблицу Stock в tableViewStock
-    QSqlQueryModel *querymodel = new QSqlQueryModel();
+    QSqlQueryModel *querymodel = new QSqlQueryModel(this);
     querymodel->setQuery("SELECT * From Stock;");
     if (querymodel->lastError().isValid()){
         qDebug() << querymodel->lastError();
     }
+
     ui->tableViewStock->setModel(querymodel);
+    ui->tableViewStock->verticalHeader()->setVisible(false); //убираем автоматическую нумерацию строк
     ui->tableViewStock->show();
 }
 
