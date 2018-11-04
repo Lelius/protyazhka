@@ -14,7 +14,14 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="0">
+   <item row="1" column="3">
+    <widget class="QPushButton" name="pushButtonReturn">
+     <property name="text">
+      <string>Назад</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -27,15 +34,22 @@
      </property>
     </spacer>
    </item>
-   <item row="1" column="1">
-    <widget class="QPushButton" name="pushButtonReturn">
+   <item row="1" column="0">
+    <widget class="QPushButton" name="pushButtonInStock">
      <property name="text">
-      <string>Назад</string>
+      <string>На склад</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="0" colspan="2">
+   <item row="0" column="0" colspan="4">
     <widget class="QTableView" name="tableViewStock"/>
+   </item>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="pushButtonOutStock">
+     <property name="text">
+      <string>Со склада</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
