@@ -8,6 +8,8 @@
 #include "stockforma.h"
 #include "mainmenuforma.h"
 #include "exitforma.h"
+#include "stockinforma.h"
+#include "stockoutforma.h"
 
 namespace Ui {
 class MainWindow;
@@ -29,6 +31,8 @@ private:
     StockForma *stockForma;
     MainMenuForma *mainMenuForma;
     ExitForma *exitForma;
+    StockInForma *stockInForma;
+    StockOutForma *stockOutForma;
 };
 
 #endif // MAINWINDOW_H

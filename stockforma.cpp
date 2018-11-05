@@ -164,3 +164,12 @@ QString StockForma::comboBoxSortCurrentIndexChanged(int index)
 
     return *stringQuery;
 }
+void StockForma::on_pushButtonStockIn_clicked()
+{
+    emit signalChangeStackWidget(3);
+}
+
+void StockForma::on_pushButtonStockOut_clicked()
+{
+    emit signalChangeStackWidget(4);
+}

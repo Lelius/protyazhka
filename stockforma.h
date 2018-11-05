@@ -27,6 +27,10 @@ signals:
 private slots:
     void on_pushButtonReturn_clicked();
 
+    void on_pushButtonStockIn_clicked();
+
+    void on_pushButtonStockOut_clicked();
+
 public slots:
     void on_comboBoxSort_currentIndexChanged(int index);
     QString comboBoxSortCurrentIndexChanged(int index);

@@ -30,20 +30,26 @@ SOURCES += \
     stockforma.cpp \
     mainmenuforma.cpp \
     exitforma.cpp \
-    myqsqlquerymodel.cpp
+    myqsqlquerymodel.cpp \
+    stockinforma.cpp \
+    stockoutforma.cpp
 
 HEADERS += \
         mainwindow.h \
     stockforma.h \
     mainmenuforma.h \
     exitforma.h \
-    myqsqlquerymodel.h
+    myqsqlquerymodel.h \
+    stockinforma.h \
+    stockoutforma.h
 
 FORMS += \
         mainwindow.ui \
     stockforma.ui \
     mainmenuforma.ui \
-    exitforma.ui
+    exitforma.ui \
+    stockinforma.ui \
+    stockoutforma.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
