@@ -1,6 +1,6 @@
 #include "myqsqlquerymodel.h"
 
-//Класс преопределяющий функцию data в классе QSqlQueryModel
+//Класс переопределяющий функцию data в классе QSqlQueryModel
 //для изменения отрисовки модели (текст по центру ячейки таблицы)
 
 MyQSqlQueryModel::MyQSqlQueryModel()

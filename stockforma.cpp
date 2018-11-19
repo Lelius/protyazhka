@@ -9,7 +9,7 @@ StockForma::StockForma(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //comboBoxSort дял сортировки таблицы Stock в tableViewStock
+    //comboBoxSort для сортировки таблицы Stock в tableViewStock
     QStringList stringListComboBoxSort;
     stringListComboBoxSort << "Номер по возрастанию" << "Номер по убыванию" << "Тип по возрастанию" << "Тип по убыванию" << "Размер по возрастанию" << "Размер по убыванию" << "Количество по возрастанию" << "Количество по убыванию" << "Метраж по возрастанию" << "Метраж по убыванию" << "Изменение по возрастанию" << "Изменение по убыванию";
     ui->comboBoxSort->addItems(stringListComboBoxSort);
@@ -156,7 +156,7 @@ QString StockForma::comboBoxSortCurrentIndexChanged(int index)
 
     *stringQuery = "SELECT * FROM Stock ORDER BY " + *s1 + " " + *s2 + ";";
 
-    MyQSqlQueryModel *queryModel = new MyQSqlQueryModel;
+    MyQSqlQueryModel *queryModel = new MyQSqlQueryModel();
     queryModel->setQuery(*stringQuery);
     StockForma::ui->tableViewStock->setModel(queryModel);
 
