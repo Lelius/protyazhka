@@ -17,3 +17,18 @@ void StockInForma::on_pushButtonBackStock_clicked()
 {
     emit signalPushButtonBackStock(1);
 }
+
+void StockInForma::on_pushButtonInNext_clicked()
+{
+
+}
+
+void StockInForma::on_pushButtonInReset_clicked()
+{
+
+}
+
+void StockInForma::on_pushButtonInAddStock_clicked()
+{
+
+}

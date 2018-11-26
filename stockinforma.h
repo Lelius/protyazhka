@@ -21,6 +21,12 @@ signals:
 private slots:
     void on_pushButtonBackStock_clicked();
 
+    void on_pushButtonInNext_clicked();
+
+    void on_pushButtonInReset_clicked();
+
+    void on_pushButtonInAddStock_clicked();
+
 private:
     Ui::StockInForma *ui;
 };
