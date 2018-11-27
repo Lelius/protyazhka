@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QtSql>
+#include <QDate>
 #include "myqsqlquerymodel.h"
 
 namespace Ui {

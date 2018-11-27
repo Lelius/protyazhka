@@ -60,7 +60,23 @@ void StockInForma::on_pushButtonBackStock_clicked()
 
 void StockInForma::on_pushButtonInNext_clicked()
 {
+    if (ui->lineEditInSize->displayText() != "0" && ui->lineEditInType->displayText() != "0" && ui->lineEditInNumber->displayText() != "0"){
+        QDate currentDate = QDate::currentDate();
+        QString stringCurrentDate = QString::number(currentDate.day()) + "." + QString::number(currentDate.month()) + "." + QString::number(currentDate.year() % 100);
 
+        QString stringQueryTemp = "INSERT INTO Temp (Номер, Тип, Размер, Количество, Метраж, Изменение) VALUES ('%1', '%2', '%3', '%4', '%5', '%6');";
+        QString stringQueryTempAll = stringQueryTemp.arg("1")
+                .arg(ui->lineEditInType->displayText())
+                .arg(ui->lineEditInSize->displayText())
+                .arg(ui->lineEditInNumber->displayText())
+                .arg(ui->lineEditInSize->displayText().toDouble() * ui->lineEditInNumber->displayText().toDouble())
+                .arg(stringCurrentDate);
+        queryTemp->exec(stringQueryTempAll);
+
+        queryTemp->exec("SELECT * FROM Temp;");
+        queryModelTemp->setQuery(*queryTemp);
+        ui->tableViewInStock->setModel(queryModelTemp);
+    }
 }
 
 void StockInForma::on_pushButtonInReset_clicked()
