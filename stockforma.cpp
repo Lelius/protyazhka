@@ -47,7 +47,7 @@ StockForma::StockForma(QWidget *parent) :
         qDebug() << "DB RateStock? Yes!";
     }
 
-    query->exec("INSERT INTO Stock (Номер, Тип, Размер, Количество, Метраж, Изменение) VALUES ('3', 'Д26', '3.00', '10', '30.00', '31.10.17');");
+    query->exec("INSERT INTO Stock (Номер, Тип, Размер, Количество, Метраж, Изменение) VALUES ('5', 'Б22-2', '4.32', '10', '43.2', '27.11.18');");
     if (query->lastError().isValid()) {
         qDebug() << query->lastError();
         qDebug() << "Insert not worked!";
@@ -57,15 +57,15 @@ StockForma::StockForma(QWidget *parent) :
 
     //Выводим нередактируемую таблицу Stock в tableViewStock
     //сортируя при этом по значению comboBoxSort
-    MyQSqlQueryModel *querymodel = new MyQSqlQueryModel;
+    queryModel = new MyQSqlQueryModel;
 
 
-    querymodel->setQuery(comboBoxSortCurrentIndexChanged(ui->comboBoxSort->currentIndex()));
-    if (querymodel->lastError().isValid()){
-        qDebug() << querymodel->lastError();
+    queryModel->setQuery(comboBoxSortCurrentIndexChanged(ui->comboBoxSort->currentIndex()));
+    if (queryModel->lastError().isValid()){
+        qDebug() << queryModel->lastError();
     }
 
-    ui->tableViewStock->setModel(querymodel);
+    ui->tableViewStock->setModel(queryModel);
     ui->tableViewStock->verticalHeader()->setVisible(false); //убираем автоматическую нумерацию строк
     ui->tableViewStock->show();
 }
@@ -156,7 +156,7 @@ QString StockForma::comboBoxSortCurrentIndexChanged(int index)
 
     *stringQuery = "SELECT * FROM Stock ORDER BY " + *s1 + " " + *s2 + ";";
 
-    MyQSqlQueryModel *queryModel = new MyQSqlQueryModel();
+    //MyQSqlQueryModel *queryModel = new MyQSqlQueryModel();
     queryModel->setQuery(*stringQuery);
     StockForma::ui->tableViewStock->setModel(queryModel);
 

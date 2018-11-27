@@ -2,6 +2,8 @@
 #define STOCKINFORMA_H
 
 #include <QWidget>
+#include <QtSql>
+#include "myqsqlquerymodel.h"
 
 namespace Ui {
 class StockInForma;
@@ -29,6 +31,10 @@ private slots:
 
 private:
     Ui::StockInForma *ui;
+    QString fileNameDataBase;
+    QSqlDatabase *dbTemp;
+    QSqlQuery *queryTemp;
+    MyQSqlQueryModel *queryModelTemp;
 };
 
 #endif // STOCKINFORMA_H

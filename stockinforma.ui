@@ -36,7 +36,7 @@
     </widget>
    </item>
    <item row="3" column="0" colspan="3">
-    <widget class="QTableView" name="tableView"/>
+    <widget class="QTableView" name="tableViewInStock"/>
    </item>
    <item row="6" column="0" colspan="3">
     <layout class="QGridLayout" name="gridLayout">
