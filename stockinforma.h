@@ -30,12 +30,19 @@ private slots:
 
     void on_pushButtonInAddStock_clicked();
 
+    void on_lineEditInType_returnPressed();
+
+    void on_lineEditInSize_returnPressed();
+
+    void on_lineEditInNumber_returnPressed();
+
 private:
     Ui::StockInForma *ui;
     QString fileNameDataBase;
     QSqlDatabase *dbTemp;
     QSqlQuery *queryTemp;
     MyQSqlQueryModel *queryModelTemp;
+    int positionNumber;
 };
 
 #endif // STOCKINFORMA_H
