@@ -56,7 +56,7 @@ void StockInForma::on_pushButtonInNext_clicked()
         MyQSqlQueryModel *model = new MyQSqlQueryModel(this);
         model->setQuery(query);
         ui->tableViewInStock->setModel(model);
-//
+
         clearLinesEdit();
     }
 }
