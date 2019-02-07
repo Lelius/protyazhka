@@ -36,13 +36,10 @@ private slots:
 
     void on_lineEditInNumber_returnPressed();
 
+    void clearLinesEdit();
+
 private:
     Ui::StockInForma *ui;
-    QString fileNameDataBase;
-    QSqlDatabase *dbTemp;
-    QSqlQuery *queryTemp;
-    MyQSqlQueryModel *queryModelTemp;
-    int positionNumber;
 };
 
 #endif // STOCKINFORMA_H

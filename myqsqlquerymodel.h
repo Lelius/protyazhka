@@ -10,7 +10,7 @@ class MyQSqlQueryModel : public QSqlQueryModel
 {
     Q_OBJECT
 public:
-    explicit MyQSqlQueryModel();
+    explicit MyQSqlQueryModel(QWidget *parent = nullptr);
 
     QVariant data (const QModelIndex &index, int role = Qt::DisplayRole) const;
 

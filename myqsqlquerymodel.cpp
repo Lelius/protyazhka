@@ -3,7 +3,7 @@
 //Класс переопределяющий функцию data в классе QSqlQueryModel
 //для изменения отрисовки модели (текст по центру ячейки таблицы)
 
-MyQSqlQueryModel::MyQSqlQueryModel()
+MyQSqlQueryModel::MyQSqlQueryModel(QWidget *parent)
 {
 
 }
