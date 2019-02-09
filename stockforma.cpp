@@ -15,9 +15,8 @@ StockForma::StockForma(QWidget *parent) :
     ui->comboBoxSort->addItems(stringListComboBoxSort);
 
     //Нет файла базы? Создаём.
-    fileNameDataBase = "stock.db";
     QFile *fileDataBase = new QFile(this);
-    fileDataBase->setFileName(fileNameDataBase);
+    fileDataBase->setFileName("stock.db");
     if (!fileDataBase->exists()) {
         fileDataBase->open(QIODevice::WriteOnly);
         fileDataBase->close();
@@ -26,48 +25,46 @@ StockForma::StockForma(QWidget *parent) :
     //Проверяем наличие таблиц в файле БД. Нет? Создаём.
     QSqlDatabase *db = new QSqlDatabase();
     *db = QSqlDatabase::addDatabase("QSQLITE");
-    db->setDatabaseName(fileNameDataBase);
+    db->setDatabaseName("stock.db");
     if (!db->open()) {
         qDebug() << db->lastError().text();
         qDebug() << "Open? No!";
     }
-    QSqlQuery *query = new QSqlQuery();
-    if (!query->exec("SELECT * FROM Stock;")) {
+    QSqlQuery query;
+    if (!query.exec("SELECT * FROM Stock;")) {
         qDebug() << "DB Stock? No!";
-        query->exec("CREATE TABLE Stock (Номер , Тип , Размер , Количество , Метраж , Изменение );");
+        query.exec("CREATE TABLE Stock (Номер INTEGER PRIMARY KEY NOT NULL, Тип , Размер , Количество , Метраж , Изменение );");
     }
-    if (query->exec("SELECT * FROM Stock;")) {
+    if (query.exec("SELECT * FROM Stock;")) {
         qDebug() << "DB Stock? Yes!";
     }
-    if (!query->exec("SELECT * FROM RateStock;")) {
+    if (!query.exec("SELECT * FROM RateStock;")) {
         qDebug() << "DB RateStock? No!";
-        query->exec("CREATE TABLE RateStock (Номер , Тип , Расценка , Изменение );");
+        query.exec("CREATE TABLE RateStock (Номер INTEGER PRIMARY KEY NOT NULL, Тип , Расценка , Изменение );");
     }
-    if (query->exec("SELECT * FROM RateStock;")) {
+    if (query.exec("SELECT * FROM RateStock;")) {
         qDebug() << "DB RateStock? Yes!";
     }
 
-    query->exec("INSERT INTO Stock (Номер, Тип, Размер, Количество, Метраж, Изменение) VALUES ('5', 'Б22-2', '4.32', '10', '43.2', '27.11.18');");
-    if (query->lastError().isValid()) {
-        qDebug() << query->lastError();
-        qDebug() << "Insert not worked!";
-    } else {
-        qDebug() << "Insert worked!";
-    }
+//    query.exec("INSERT INTO Stock (Номер, Тип, Размер, Количество, Метраж, Изменение) VALUES ('5', 'Б22-2', '4.32', '10', '43.2', '27.11.18');");
+//    if (query.lastError().isValid()) {
+//        qDebug() << query.lastError();
+//        qDebug() << "Insert not worked!";
+//    } else {
+//        qDebug() << "Insert worked!";
+//    }
 
     //Выводим нередактируемую таблицу Stock в tableViewStock
     //сортируя при этом по значению comboBoxSort
-    queryModel = new MyQSqlQueryModel;
+    MyQSqlQueryModel *model = new MyQSqlQueryModel(this);
 
-
-    queryModel->setQuery(comboBoxSortCurrentIndexChanged(ui->comboBoxSort->currentIndex()));
-    if (queryModel->lastError().isValid()){
-        qDebug() << queryModel->lastError();
+    model->setQuery(comboBoxSortCurrentIndexChanged(ui->comboBoxSort->currentIndex()));
+    if (model->lastError().isValid()){
+        qDebug() << model->lastError();
     }
 
-    ui->tableViewStock->setModel(queryModel);
+    ui->tableViewStock->setModel(model);
     ui->tableViewStock->verticalHeader()->setVisible(false); //убираем автоматическую нумерацию строк
-    ui->tableViewStock->show();
 }
 
 StockForma::~StockForma()
@@ -156,14 +153,15 @@ QString StockForma::comboBoxSortCurrentIndexChanged(int index)
 
     *stringQuery = "SELECT * FROM Stock ORDER BY " + *s1 + " " + *s2 + ";";
 
-    //MyQSqlQueryModel *queryModel = new MyQSqlQueryModel();
-    queryModel->setQuery(*stringQuery);
-    StockForma::ui->tableViewStock->setModel(queryModel);
+    MyQSqlQueryModel *model = new MyQSqlQueryModel(this);
+    model->setQuery(*stringQuery);
+    StockForma::ui->tableViewStock->setModel(model);
 
     qDebug() << *stringQuery;
 
     return *stringQuery;
 }
+
 void StockForma::on_pushButtonStockIn_clicked()
 {
     emit signalChangeStackWidget(3);

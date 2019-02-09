@@ -39,14 +39,32 @@ void StockInForma::on_pushButtonBackStock_clicked()
 void StockInForma::on_pushButtonInNext_clicked()
 {
     if (ui->lineEditInSize->displayText() != "" && ui->lineEditInType->displayText() != "" && ui->lineEditInNumber->displayText() != ""){
+
+        //В исходных числах меняем запятую на точку
+        QString strSize = commaToPointInString(ui->lineEditInSize->displayText());
+        QString strNumber = commaToPointInString(ui->lineEditInNumber->displayText());
+
+        //Проверяем: а числа ли? Буквы преобразовываются в ноль
+        //Числовой ноль тоже отбрасываем
+        if (strSize.toDouble() == 0.0){
+            ui->labelTextCostOfWork->clear();
+            ui->labelTextCostOfWork->setText("В графах Размер и Количество разрешаются только числа.");
+            return;
+        }
+        if (strNumber.toDouble() == 0.0){
+            ui->labelTextCostOfWork->clear();
+            ui->labelTextCostOfWork->setText("В графах Размер и Количество разрешаются только числа.");
+            return;
+        }
+
         QDate currentDate = QDate::currentDate();
         QString stringCurrentDate = QString::number(currentDate.day()) + "." + QString::number(currentDate.month()) + "." + QString::number(currentDate.year() % 100);
 
         QString stringQueryTemp = "INSERT INTO Temp (Тип, Размер, Количество, Метраж, Изменение) VALUES ('%1', '%2', '%3', '%4', '%5');";
         QString stringQueryTempAll = stringQueryTemp.arg(ui->lineEditInType->displayText())
-                .arg(ui->lineEditInSize->displayText())
-                .arg(ui->lineEditInNumber->displayText())
-                .arg(ui->lineEditInSize->displayText().toDouble() * ui->lineEditInNumber->displayText().toDouble())
+                .arg(strSize)
+                .arg(strNumber)
+                .arg(strSize.toDouble() * strNumber.toDouble())
                 .arg(stringCurrentDate);
 
         QSqlQuery query;
@@ -81,6 +99,8 @@ void StockInForma::on_pushButtonInReset_clicked()
 
 void StockInForma::on_pushButtonInAddStock_clicked()
 {
+    QSqlQuery query;
+
 
 }
 
@@ -105,4 +125,18 @@ void StockInForma::clearLinesEdit()
     ui->lineEditInSize->setText("");
     ui->lineEditInNumber->setText("");
     ui->lineEditInType->setFocus();
+}
+
+QString StockInForma::commaToPointInString(QString s)
+{
+    QString str = "";
+
+    for (int i = 0; i < s.length(); i++){
+        if (s.at(i) == ',')
+            str += '.';
+        else
+            str += s.at(i);
+    }
+
+    return str;
 }

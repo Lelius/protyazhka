@@ -37,8 +37,6 @@ public slots:
 
 private:
     Ui::StockForma *ui;
-    QString fileNameDataBase;
-    MyQSqlQueryModel *queryModel;
 };
 
 #endif // STOCKFORMA_H

@@ -38,6 +38,8 @@ private slots:
 
     void clearLinesEdit();
 
+    QString commaToPointInString(QString);
+
 private:
     Ui::StockInForma *ui;
 };
