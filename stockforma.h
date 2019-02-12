@@ -31,12 +31,15 @@ private slots:
 
     void on_pushButtonStockOut_clicked();
 
+    void on_checkBoxGroup_stateChanged(int arg1);
+
 public slots:
-    void on_comboBoxSort_currentIndexChanged(int index);
-    QString comboBoxSortCurrentIndexChanged(int index);
+    void resetModelOnTableView();
+    void slotResetModelOnTableView();
 
 private:
     Ui::StockForma *ui;
+    bool checkBoxGroupState;
 };
 
 #endif // STOCKFORMA_H

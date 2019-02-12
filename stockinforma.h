@@ -20,6 +20,7 @@ public:
 
 signals:
     void signalPushButtonBackStock(int index);
+    void signalResetModelOnTableView();
 
 private slots:
     void on_pushButtonBackStock_clicked();

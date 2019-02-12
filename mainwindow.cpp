@@ -30,9 +30,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(stockForma, &StockForma::signalChangeStackWidget, this, &MainWindow::slotChangeStackWidget);
     connect(mainMenuForma, &MainMenuForma::signalChangeStackWidget, this, &MainWindow::slotChangeStackWidget);
     connect(exitForma, &ExitForma::signalChangeStackWidget, this, &MainWindow::slotChangeStackWidget);
-    connect(stockForma, &StockForma::signalComboBoxSort_currentIndexChanged, stockForma, &StockForma::comboBoxSortCurrentIndexChanged);
     connect(stockInForma, &StockInForma::signalPushButtonBackStock, this, &MainWindow::slotChangeStackWidget);
     connect(stockOutForma, &StockOutForma::signalPushButtonStockOut, this, &MainWindow::slotChangeStackWidget);
+    connect(stockInForma, &StockInForma::signalResetModelOnTableView, stockForma, &StockForma::slotResetModelOnTableView);
 }
 
 MainWindow::~MainWindow()
