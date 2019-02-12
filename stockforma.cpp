@@ -63,13 +63,17 @@ void StockForma::on_pushButtonReturn_clicked()
 void StockForma::resetModelOnTableView()
 {
     QSqlQuery query;
+    //обновление модели без группировки
     if (!checkBoxGroupState){
-        query.exec("SELECT * FROM Stock ORDER BY Тип, Размер;");
+        query.exec("SELECT Тип, Размер, Количество, Метраж, Дата "
+                   "FROM Stock "
+                   "ORDER BY Тип, Размер;");
         MyQSqlQueryModel *model = new MyQSqlQueryModel(this);
         model->setQuery(query);
         ui->tableViewStock->setModel(model);
         return;
     }
+    //или с группировкой
     if (!query.exec("SELECT Тип , Размер , SUM(Количество) AS Количество, SUM(Метраж) AS Метраж, Дата "
                    "FROM Stock "
                    "GROUP BY Тип, Размер "

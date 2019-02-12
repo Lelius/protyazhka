@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>437</width>
-    <height>279</height>
+    <width>651</width>
+    <height>340</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,108 +19,106 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_3">
-   <item row="0" column="1">
-    <spacer name="horizontalSpacer_3">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>40</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="3" column="0">
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="4">
-      <widget class="QPushButton" name="pushButtonBackStock">
-       <property name="text">
-        <string>Назад</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="3">
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>374</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="0" column="1">
-      <widget class="QPushButton" name="pushButtonInReset">
-       <property name="text">
-        <string>Убрать</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QPushButton" name="pushButtonInAddStock">
-       <property name="text">
-        <string>Сдать на склад</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QPushButton" name="pushButtonInNext">
-       <property name="text">
-        <string>Добавить</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
+  <layout class="QGridLayout" name="gridLayout_4">
    <item row="0" column="0">
-    <layout class="QGridLayout" name="gridLayout_2">
-     <item row="1" column="0">
-      <widget class="QLabel" name="labelInSize">
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelInStockTopText">
        <property name="text">
-        <string>Размер</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; color:#5555ff;&quot;&gt;Сдача продукции на склад&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="lineEditInSize"/>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="lineEditInNumber"/>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEditInType"/>
+     <item row="1" column="0">
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="2" column="0">
+        <widget class="QLabel" name="labelInNumber">
+         <property name="text">
+          <string>Количество</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="labelInType">
+         <property name="text">
+          <string>Тип</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEditInSize"/>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="lineEditInNumber"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineEditInType"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="labelInSize">
+         <property name="text">
+          <string>Размер</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="labelInNumber">
-       <property name="text">
-        <string>Количество</string>
-       </property>
-      </widget>
+      <widget class="QTableView" name="tableViewInStock"/>
      </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="labelInType">
+     <item row="3" column="0">
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="4">
+        <widget class="QPushButton" name="pushButtonBackStock">
+         <property name="text">
+          <string>Назад</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>374</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="pushButtonInReset">
+         <property name="text">
+          <string>Убрать</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="pushButtonInAddStock">
+         <property name="text">
+          <string>Сдать на склад</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="pushButtonInNext">
+         <property name="text">
+          <string>Добавить</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="labelTextCostOfWork">
        <property name="text">
-        <string>Тип</string>
+        <string>Стоимость работы</string>
        </property>
       </widget>
      </item>
     </layout>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="labelTextCostOfWork">
-     <property name="text">
-      <string>Стоимость работы</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QTableView" name="tableViewInStock"/>
    </item>
   </layout>
  </widget>
