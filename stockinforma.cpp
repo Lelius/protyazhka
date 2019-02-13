@@ -10,12 +10,12 @@ StockInForma::StockInForma(QWidget *parent) :
 
     //создаём временную таблицу Temp
     QSqlQuery query;
-    if (!query.exec("SELECT * FROM Temp;")){
-        qDebug() << "DBTemp? No!";
-        query.exec("CREATE TABLE Temp(Номер INTEGER PRIMARY KEY NOT NULL, Тип, Размер, Количество, Метраж, Дата);");
+    if (!query.exec("SELECT * FROM TempIn;")){
+        qDebug() << "DBTempIn? No!";
+        query.exec("CREATE TABLE TempIn(Номер INTEGER PRIMARY KEY NOT NULL, Тип, Размер, Количество, Метраж, Дата);");
     }
-    if (query.exec("SELECT * FROM Temp")){
-        qDebug() << "DB Temp? Yes!";
+    if (query.exec("SELECT * FROM TempIn")){
+        qDebug() << "DB TempIn? Yes!";
     }
 
     //обнуляем поля заполнения данных
@@ -26,7 +26,7 @@ StockInForma::~StockInForma()
 {
     //уничтожаем временную таблицу Temp
     QSqlQuery query;
-    query.exec("DROP TABLE IF EXISTS Temp;");
+    query.exec("DROP TABLE IF EXISTS TempIn;");
 
     delete ui;
 }
@@ -57,7 +57,7 @@ void StockInForma::on_pushButtonInNext_clicked()
             return;
         }
 
-        QString stringQueryTemp = "INSERT INTO Temp (Тип, Размер, Количество, Метраж, Дата) VALUES ('%1', '%2', '%3', '%4', strftime('%d-%m-%Y'));";
+        QString stringQueryTemp = "INSERT INTO TempIn (Тип, Размер, Количество, Метраж, Дата) VALUES ('%1', '%2', '%3', '%4', strftime('%d-%m-%Y'));";
         QString stringQueryTempAll = stringQueryTemp.arg(ui->lineEditInType->displayText())
                 .arg(strSize)
                 .arg(strNumber)
@@ -66,7 +66,7 @@ void StockInForma::on_pushButtonInNext_clicked()
         QSqlQuery query;
         if (!query.exec(stringQueryTempAll))
             qDebug() << "Строка не вставилась";
-        query.exec("SELECT * FROM Temp;");
+        query.exec("SELECT * FROM TempIn;");
         MyQSqlQueryModel *model = new MyQSqlQueryModel(this);
         model->setQuery(query);
         ui->tableViewInStock->setModel(model);
@@ -78,7 +78,7 @@ void StockInForma::on_pushButtonInNext_clicked()
 void StockInForma::on_pushButtonInReset_clicked()
 {
     QSqlQuery query;
-    if (!query.exec("DELETE FROM Temp WHERE Номер = (SELECT MAX(Номер) FROM Temp LIMIT 1);")){
+    if (!query.exec("DELETE FROM TempIn WHERE Номер = (SELECT MAX(Номер) FROM TempIn LIMIT 1);")){
         qDebug() << "Строка не удалена";
         qDebug() << query.lastError().text();
     }
@@ -87,7 +87,7 @@ void StockInForma::on_pushButtonInReset_clicked()
         qDebug() << query.lastError().text();
     }
     MyQSqlQueryModel *model = new MyQSqlQueryModel(this);
-    query.exec("SELECT * FROM Temp;");
+    query.exec("SELECT * FROM TempIn;");
     model->setQuery(query);
     ui->tableViewInStock->setModel(model);
     clearLinesEdit();
@@ -101,12 +101,12 @@ void StockInForma::on_pushButtonInAddStock_clicked()
                "Тип, Размер, Количество, Метраж, Дата) "
                "SELECT "
                "Тип, Размер, Количество, Метраж, Дата "
-               "FROM Temp;")){
+               "FROM TempIn;")){
         qDebug() << "Ошибка переноса в основную таблицу!";
     }
 
-    query.exec("DELETE FROM Temp;");
-    query.exec("SELECT * FROM Temp;");
+    query.exec("DELETE FROM TempIn;");
+    query.exec("SELECT * FROM TempIn;");
     MyQSqlQueryModel *model = new MyQSqlQueryModel(this);
     model->setQuery(query);
     ui->tableViewInStock->setModel(model);

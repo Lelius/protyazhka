@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QDesktopWidget>
 #include <QApplication>
+#include <QGuiApplication>
 
 #include "stockforma.h"
 #include "mainmenuforma.h"
