@@ -13,11 +13,11 @@ MainWindow::MainWindow(QWidget *parent) :
     MainWindow::resize(rect.width()/2, rect.height()/2);
 
     //Инициализируем виджеты-формы для QStackedWidget
-    stockForma = new StockForma(this);
-    mainMenuForma = new MainMenuForma(this);
-    exitForma = new ExitForma(this);
-    stockInForma = new StockInForma(this);
-    stockOutForma = new StockOutForma(this);
+    StockForma *stockForma = new StockForma(this);
+    MainMenuForma *mainMenuForma = new MainMenuForma(this);
+    ExitForma *exitForma = new ExitForma(this);
+    StockInForma *stockInForma = new StockInForma(this);
+    StockOutForma *stockOutForma = new StockOutForma(this);
 
     //Назначаем индексы страниц для QStackedWidget
     ui->stackedWidget->insertWidget(0, mainMenuForma);

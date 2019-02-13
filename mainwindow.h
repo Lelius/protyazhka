@@ -29,11 +29,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    StockForma *stockForma;
-    MainMenuForma *mainMenuForma;
-    ExitForma *exitForma;
-    StockInForma *stockInForma;
-    StockOutForma *stockOutForma;
 };
 
 #endif // MAINWINDOW_H
