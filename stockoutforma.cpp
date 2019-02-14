@@ -19,7 +19,7 @@ StockOutForma::StockOutForma(QWidget *parent) :
     }
 
     //обнуляем поля заполнения данных
-    clearLinesEdit();
+    emit on_pushButtonDelTempOut_clicked();
 }
 
 StockOutForma::~StockOutForma()
@@ -52,12 +52,40 @@ void StockOutForma::on_pushButtonAddTempOut_clicked()
             return;
         }
 
+        //Проверяем наличие в таблице профиля заданого типа и размера
+        //и его достаточного количества
         QSqlQuery query;
-        query.exec("SELECT Тип "
-                   "FROM Stock WHERE "
-                   "Тип = '" + ui->lineEditOutType->displayText() + "';");
-        if (query.next())
+        query.exec("SELECT Тип, Размер "
+                   "FROM Stock "
+                   "WHERE Тип = '" + ui->lineEditOutType->displayText() + "'"
+                   "AND Размер = '" + strSize + "';");
+        if (query.next()){
             strAv = "Есть";
+            if (!query.exec("SELECT SUM(Количество) AS Количество "
+                            "FROM Stock "
+                            "WHERE Тип = '" + ui->lineEditOutType->displayText() + "' "
+                            "AND Размер = '" + strSize + "';"))
+                qDebug() << "Ошибка запроса " + query.lastError().text();
+
+            //читаем результат выборки
+            QSqlRecord rec = query.record();
+            int numStock, numTemp;
+            query.next();
+            numStock = query.value(rec.indexOf("Количество")).toInt();
+            qDebug()<< "Количество в Stock = " + QString::number(numStock);
+            //и во временной посмотрим
+            if (!query.exec("SELECT SUM(Количество) AS Количество "
+                            "FROM TempOut "
+                            "WHERE Тип = '" + ui->lineEditOutType->displayText() + "' "
+                            "AND Размер = '" + strSize + "';"))
+                qDebug() << "Ошибка запроса " + query.lastError().text();
+            rec = query.record();
+            query.next();
+            numTemp = query.value(rec.indexOf("Количество")).toInt();
+            qDebug() << "Количество в TempOut = " + QString::number(numTemp);
+            if (strNumber.toInt() > (numStock - numTemp))
+                strAv = "Меньше";
+        }
 // ?????
 
         QString stringQueryTemp = "INSERT INTO TempOut (Тип, Размер, Количество, Метраж , Наличие ) VALUES ('%1', '%2', '%3', '%4', '%5');";
@@ -106,7 +134,8 @@ void StockOutForma::clearLinesEdit()
     ui->lineEditOutType->setText("");
     ui->lineEditOutSize->setText("");
     ui->lineEditOutNumber->setText("");
-    ui->lineEditOutType->setFocus();
+    //и 100% установка фокуса ( фокус! (: )
+    QTimer::singleShot(0, ui->lineEditOutType, SLOT(setFocus()));
 }
 
 QString StockOutForma::commaToPointOutString(QString s)

@@ -19,7 +19,7 @@ StockInForma::StockInForma(QWidget *parent) :
     }
 
     //обнуляем поля заполнения данных
-    clearLinesEdit();
+    emit on_pushButtonInReset_clicked();
 }
 
 StockInForma::~StockInForma()
@@ -133,7 +133,8 @@ void StockInForma::clearLinesEdit()
     ui->lineEditInType->setText("");
     ui->lineEditInSize->setText("");
     ui->lineEditInNumber->setText("");
-    ui->lineEditInType->setFocus();
+    //и 100% установка фокуса ( фокус! (: )
+    QTimer::singleShot(0, ui->lineEditInType, SLOT(setFocus()));
 }
 
 QString StockInForma::commaToPointInString(QString s)
