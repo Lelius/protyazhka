@@ -30,6 +30,7 @@ StockOutForma::~StockOutForma()
     delete ui;
 }
 
+//заполнение TempOut
 void StockOutForma::on_pushButtonAddTempOut_clicked()
 {
     if (ui->lineEditOutSize->displayText() != "" && ui->lineEditOutType->displayText() != "" && ui->lineEditOutNumber->displayText() != ""){
@@ -43,12 +44,12 @@ void StockOutForma::on_pushButtonAddTempOut_clicked()
         //Числовой ноль тоже отбрасываем
         if (strSize.toDouble() == 0.0){
             ui->labelOutTextCostOfWork->clear();
-            ui->labelOutTextCostOfWork->setText("В графах Размер и Количество разрешаются только числа.");
+            ui->labelOutTextCostOfWork->setText("В графах Размер и Количество разрешаются только числа больше нуля.");
             return;
         }
         if (strNumber.toDouble() == 0.0){
             ui->labelOutTextCostOfWork->clear();
-            ui->labelOutTextCostOfWork->setText("В графах Размер и Количество разрешаются только числа.");
+            ui->labelOutTextCostOfWork->setText("В графах Размер и Количество разрешаются только числа больше нуля.");
             return;
         }
 
@@ -85,8 +86,9 @@ void StockOutForma::on_pushButtonAddTempOut_clicked()
             qDebug() << "Количество в TempOut = " + QString::number(numTemp);
             if (strNumber.toInt() > (numStock - numTemp))
                 strAv = "Меньше";
+            if ((numStock - numTemp) == 0)
+                strAv = "Нет";
         }
-// ?????
 
         QString stringQueryTemp = "INSERT INTO TempOut (Тип, Размер, Количество, Метраж , Наличие ) VALUES ('%1', '%2', '%3', '%4', '%5');";
         QString stringQueryTempAll = stringQueryTemp.arg(ui->lineEditOutType->displayText())
@@ -106,6 +108,7 @@ void StockOutForma::on_pushButtonAddTempOut_clicked()
     }
 }
 
+//удаление нижней строки в TempOut
 void StockOutForma::on_pushButtonDelTempOut_clicked()
 {
     QSqlQuery query;
@@ -124,9 +127,72 @@ void StockOutForma::on_pushButtonDelTempOut_clicked()
     clearLinesEdit();
 }
 
-void StockOutForma::on_pushButtonStockOut_clicked()
+//удаление из Stock на основе данных в TempOut
+void StockOutForma::on_pushButtonOutStock_clicked()
 {
-    emit signalPushButtonStockOut(1);
+    QSqlQuery query;
+    //выбираем строки в TempOut того что в наличии
+    if (!query.exec("SELECT Номер, Тип, Размер, Количество "
+                    "FROM TempOut "
+                    "WHERE Наличие = 'Есть';"))
+        qDebug() << "Ошибка запроса 1" + query.lastError().text();
+    QString strType, strSize, strNumber;
+    int numb;
+    //перебираем эти строки
+    while (query.next()){
+        QSqlRecord rec = query.record();
+        strNumber = query.value(rec.indexOf("Номер")).toString();
+        strType = query.value(rec.indexOf("Тип")).toString();
+        strSize = query.value(rec.indexOf("Размер")).toString();
+        numb = query.value(rec.indexOf("Количество")).toInt();
+
+        QSqlQuery q;
+        QSqlRecord r;
+        QString nn;
+        int n;
+        //пока есть что сдавать
+        while (numb > 0){
+            //ищем строку в Stock с самой древней датой
+            if (!q.exec("SELECT Номер, Количество FROM Stock WHERE Тип = '" + strType + "' AND Размер = '" + strSize + "' AND Дата = (SELECT MIN(Дата) AS Дата FROM Stock WHERE Тип = '" + strType + "' AND Размер = '" + strSize + "');"))
+                qDebug() << "Ошибка запроса 2" + q.lastError().text();
+            q.next();
+            r = q.record();
+            nn = q.value(r.indexOf("Номер")).toString();
+            n = q.value(r.indexOf("Количество")).toInt();
+            //если в наличии меньше удаляем строку
+            //и получаем разницу для следующей строки
+            if (numb >= n){
+                if (!q.exec("DELETE FROM Stock "
+                       "WHERE Номер = '" + nn + "';"))
+                    qDebug() << "Ошибка запроса 3" + q.lastError().text();
+                numb -= n;
+            }
+            //если в наличии больше (равно) списываем разницу
+            else {
+                int i;
+                if ((i = n - numb) < 0)
+                    qDebug() << "Попытка введения в таблицу отрицательного числа";
+                if (!q.exec("UPDATE Stock SET Количество = '" + QString::number(i) + "' WHERE Номер = '" + nn + "';"))
+                    qDebug() << "Ошибка запроса 4" + q.lastError().text();
+                numb = 0;
+            }
+        }
+        //удаляем обработанную выдачу из TempOut
+        if (!query.exec("DELETE FROM TempOut WHERE Номер = '" + strNumber + "';"))
+            qDebug() << "Ошибка запроса 5" + query.lastError().text();
+    }
+    //перерисовываем TempOut с тем что осталось
+    MyQSqlQueryModel *model = new MyQSqlQueryModel(this);
+    query.exec("SELECT * FROM TempOut;");
+    model->setQuery(query);
+    ui->tableViewOutStock->setModel(model);
+    //и перезагружаем новую модель Stock
+    emit signalResetModelOnTableView();
+}
+
+void StockOutForma::on_pushButtonStockOutExit_clicked()
+{
+    emit signalPushButtonStockOutExit(1);
 }
 
 void StockOutForma::clearLinesEdit()
@@ -166,7 +232,4 @@ void StockOutForma::on_lineEditOutNumber_returnPressed()
 {
     ui->lineEditOutType->setFocus();
 }
-
-
-
 

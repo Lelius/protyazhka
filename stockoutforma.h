@@ -18,10 +18,11 @@ public:
     ~StockOutForma();
 
 signals:
-    void signalPushButtonStockOut(int index);
+    void signalPushButtonStockOutExit(int index);
+    void signalResetModelOnTableView();
 
 private slots:
-    void on_pushButtonStockOut_clicked();
+    void on_pushButtonStockOutExit_clicked();
 
     void clearLinesEdit();
 
@@ -36,6 +37,8 @@ private slots:
     void on_pushButtonAddTempOut_clicked();
 
     void on_pushButtonDelTempOut_clicked();
+
+    void on_pushButtonOutStock_clicked();
 
 private:
     Ui::StockOutForma *ui;

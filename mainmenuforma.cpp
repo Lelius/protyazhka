@@ -22,3 +22,8 @@ void MainMenuForma::on_pushButtonExit_clicked()
 {
     emit signalChangeStackWidget(2);
 }
+
+void MainMenuForma::on_pushButtonCost_clicked()
+{
+    emit signalChangeStackWidget(5);
+}

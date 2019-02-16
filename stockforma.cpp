@@ -45,7 +45,6 @@ StockForma::StockForma(QWidget *parent) :
     ui->checkBoxGroup->setChecked(true);
 
     //Выводим нередактируемую таблицу Stock в tableViewStock
-    //сортируя при этом по значению comboBoxSort
     resetModelOnTableView();
     ui->tableViewStock->verticalHeader()->setVisible(false); //убираем автоматическую нумерацию строк
 }

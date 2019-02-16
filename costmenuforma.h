@@ -15,6 +15,12 @@ public:
     explicit CostMenuForma(QWidget *parent = nullptr);
     ~CostMenuForma();
 
+signals:
+    void signalChangeStackWidget(int index);
+
+private slots:
+    void on_pushButtonCostMenuExit_clicked();
+
 private:
     Ui::CostMenuForma *ui;
 };

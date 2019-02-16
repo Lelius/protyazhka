@@ -11,6 +11,7 @@
 #include "exitforma.h"
 #include "stockinforma.h"
 #include "stockoutforma.h"
+#include "costmenuforma.h"
 
 namespace Ui {
 class MainWindow;

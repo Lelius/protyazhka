@@ -104,7 +104,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButtonStockOut">
+        <widget class="QPushButton" name="pushButtonStockOutExit">
          <property name="text">
           <string>Назад</string>
          </property>

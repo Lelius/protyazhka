@@ -23,6 +23,8 @@ private slots:
 
     void on_pushButtonExit_clicked();
 
+    void on_pushButtonCost_clicked();
+
 private:
     Ui::MainMenuForma *ui;
 };

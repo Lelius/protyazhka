@@ -48,12 +48,12 @@ void StockInForma::on_pushButtonInNext_clicked()
         //Числовой ноль тоже отбрасываем
         if (strSize.toDouble() == 0.0){
             ui->labelTextCostOfWork->clear();
-            ui->labelTextCostOfWork->setText("В графах Размер и Количество разрешаются только числа.");
+            ui->labelTextCostOfWork->setText("В графах Размер и Количество разрешаются только числа больше нуля.");
             return;
         }
         if (strNumber.toDouble() == 0.0){
             ui->labelTextCostOfWork->clear();
-            ui->labelTextCostOfWork->setText("В графах Размер и Количество разрешаются только числа.");
+            ui->labelTextCostOfWork->setText("В графах Размер и Количество разрешаются только числа больше нуля.");
             return;
         }
 

@@ -12,3 +12,8 @@ CostMenuForma::~CostMenuForma()
 {
     delete ui;
 }
+
+void CostMenuForma::on_pushButtonCostMenuExit_clicked()
+{
+    emit signalChangeStackWidget(0);
+}
