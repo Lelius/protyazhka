@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
     StockInForma *stockInForma = new StockInForma(this);
     StockOutForma *stockOutForma = new StockOutForma(this);
     CostMenuForma *costMenuForma = new CostMenuForma(this);
+    CostStockForma *costStockForma = new CostStockForma(this);
+    CostWorkForma *costWorkForma = new CostWorkForma(this);
 
     //Назначаем индексы страниц для QStackedWidget
     ui->stackedWidget->insertWidget(0, mainMenuForma);
@@ -27,6 +29,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->stackedWidget->insertWidget(3, stockInForma);
     ui->stackedWidget->insertWidget(4, stockOutForma);
     ui->stackedWidget->insertWidget(5, costMenuForma);
+    ui->stackedWidget->insertWidget(6, costStockForma);
+    ui->stackedWidget->insertWidget(7, costWorkForma);
     ui->stackedWidget->setCurrentIndex(0);
 
     connect(stockForma, &StockForma::signalChangeStackWidget, this, &MainWindow::slotChangeStackWidget);
@@ -37,6 +41,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(stockInForma, &StockInForma::signalResetModelOnTableView, stockForma, &StockForma::slotResetModelOnTableView);
     connect(stockOutForma, &StockOutForma::signalResetModelOnTableView, stockForma, &StockForma::slotResetModelOnTableView);
     connect(costMenuForma, &CostMenuForma::signalChangeStackWidget, this, &MainWindow::slotChangeStackWidget);
+    connect(costStockForma, &CostStockForma::signalChangeStackWidget, this, &MainWindow::slotChangeStackWidget);
+    connect(costWorkForma, &CostWorkForma::signalChangeStackWidget, this, &MainWindow::slotChangeStackWidget);
 }
 
 MainWindow::~MainWindow()

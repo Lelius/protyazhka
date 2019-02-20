@@ -12,3 +12,8 @@ CostWorkForma::~CostWorkForma()
 {
     delete ui;
 }
+
+void CostWorkForma::on_pushButtonExitCostWorkForma_clicked()
+{
+    emit signalChangeStackWidget(5);
+}

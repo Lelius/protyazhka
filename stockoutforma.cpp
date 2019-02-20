@@ -232,4 +232,3 @@ void StockOutForma::on_lineEditOutNumber_returnPressed()
 {
     ui->lineEditOutType->setFocus();
 }
-

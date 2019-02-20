@@ -15,6 +15,12 @@ public:
     explicit CostWorkForma(QWidget *parent = nullptr);
     ~CostWorkForma();
 
+signals:
+    void signalChangeStackWidget(int index);
+
+private slots:
+    void on_pushButtonExitCostWorkForma_clicked();
+
 private:
     Ui::CostWorkForma *ui;
 };
