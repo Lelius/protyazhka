@@ -18,14 +18,14 @@ StockForma::StockForma(QWidget *parent) :
     }
 
     //Проверяем наличие таблиц в файле БД. Нет? Создаём.
-    QSqlDatabase *db = new QSqlDatabase();
-    *db = QSqlDatabase::addDatabase("QSQLITE");
-    db->setDatabaseName("stock.db");
-    if (!db->open()) {
-        qDebug() << db->lastError().text();
+    QSqlDatabase *dbStock = new QSqlDatabase();
+    *dbStock = QSqlDatabase::addDatabase("QSQLITE", "StockDB");
+    dbStock->setDatabaseName("stock.db");
+    if (!dbStock->open()) {
+        qDebug() << dbStock->lastError().text();
         qDebug() << "Open? No!";
     }
-    QSqlQuery query;
+    QSqlQuery query(*dbStock);
     if (!query.exec("SELECT * FROM Stock;")) {
         qDebug() << "DB Stock? No!";
         query.exec("CREATE TABLE Stock (Номер INTEGER PRIMARY KEY NOT NULL, Тип , Размер , Количество , Метраж , Дата );");
@@ -61,7 +61,8 @@ void StockForma::on_pushButtonReturn_clicked()
 
 void StockForma::resetModelOnTableView()
 {
-    QSqlQuery query;
+    QSqlDatabase dbStock = QSqlDatabase::database("StockDB");
+    QSqlQuery query(dbStock);
     //обновление модели без группировки
     if (!checkBoxGroupState){
         query.exec("SELECT Тип, Размер, Количество, Метраж, Дата "

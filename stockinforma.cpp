@@ -9,7 +9,8 @@ StockInForma::StockInForma(QWidget *parent) :
     ui->setupUi(this);
 
     //создаём временную таблицу Temp
-    QSqlQuery query;
+    QSqlDatabase dbStock = QSqlDatabase::database("StockDB");
+    QSqlQuery query(dbStock);
     if (!query.exec("SELECT * FROM TempIn;")){
         qDebug() << "DBTempIn? No!";
         query.exec("CREATE TABLE TempIn(Номер INTEGER PRIMARY KEY NOT NULL, Тип, Размер, Количество, Метраж, Дата);");
@@ -25,7 +26,8 @@ StockInForma::StockInForma(QWidget *parent) :
 StockInForma::~StockInForma()
 {
     //уничтожаем временную таблицу Temp
-    QSqlQuery query;
+    QSqlDatabase dbStock = QSqlDatabase::database("StockDB");
+    QSqlQuery query(dbStock);
     query.exec("DROP TABLE IF EXISTS TempIn;");
 
     delete ui;
@@ -63,7 +65,8 @@ void StockInForma::on_pushButtonInNext_clicked()
                 .arg(strNumber)
                 .arg(strSize.toDouble() * strNumber.toDouble());
 
-        QSqlQuery query;
+        QSqlDatabase dbStock = QSqlDatabase::database("StockDB");
+        QSqlQuery query(dbStock);
         if (!query.exec(stringQueryTempAll))
             qDebug() << "Строка не вставилась";
         query.exec("SELECT * FROM TempIn;");
@@ -77,7 +80,8 @@ void StockInForma::on_pushButtonInNext_clicked()
 
 void StockInForma::on_pushButtonInReset_clicked()
 {
-    QSqlQuery query;
+    QSqlDatabase dbStock = QSqlDatabase::database("StockDB");
+    QSqlQuery query(dbStock);
     if (!query.exec("DELETE FROM TempIn WHERE Номер = (SELECT MAX(Номер) FROM TempIn LIMIT 1);")){
         qDebug() << "Строка не удалена";
         qDebug() << query.lastError().text();
@@ -95,7 +99,8 @@ void StockInForma::on_pushButtonInReset_clicked()
 
 void StockInForma::on_pushButtonInAddStock_clicked()
 {
-    QSqlQuery query;
+    QSqlDatabase dbStock = QSqlDatabase::database("StockDB");
+    QSqlQuery query(dbStock);
 
     if(!query.exec("INSERT INTO Stock ("
                "Тип, Размер, Количество, Метраж, Дата) "

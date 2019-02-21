@@ -2,6 +2,8 @@
 #define COSTMENUFORMA_H
 
 #include <QWidget>
+#include <QFile>
+#include <QtSql>
 
 namespace Ui {
 class CostMenuForma;

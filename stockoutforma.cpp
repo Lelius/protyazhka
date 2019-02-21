@@ -9,7 +9,8 @@ StockOutForma::StockOutForma(QWidget *parent) :
     ui->setupUi(this);
 
     //создаём временную таблицу Temp
-    QSqlQuery query;
+    QSqlDatabase dbStock = QSqlDatabase::database("StockDB");
+    QSqlQuery query(dbStock);
     if (!query.exec("SELECT * FROM TempOut;")){
         qDebug() << "DBTempOut? No!";
         query.exec("CREATE TABLE TempOut(Номер INTEGER PRIMARY KEY NOT NULL, Тип, Размер, Количество, Метраж, Наличие);");
@@ -24,7 +25,8 @@ StockOutForma::StockOutForma(QWidget *parent) :
 
 StockOutForma::~StockOutForma()
 {
-    QSqlQuery query;
+    QSqlDatabase dbStock = QSqlDatabase::database("StockDB");
+    QSqlQuery query(dbStock);
     query.exec("DROP TABLE IF EXISTS TempOut;");
 
     delete ui;
@@ -55,7 +57,8 @@ void StockOutForma::on_pushButtonAddTempOut_clicked()
 
         //Проверяем наличие в таблице профиля заданого типа и размера
         //и его достаточного количества
-        QSqlQuery query;
+        QSqlDatabase dbStock = QSqlDatabase::database("StockDB");
+        QSqlQuery query(dbStock);
         query.exec("SELECT Тип, Размер "
                    "FROM Stock "
                    "WHERE Тип = '" + ui->lineEditOutType->displayText() + "'"
@@ -111,7 +114,8 @@ void StockOutForma::on_pushButtonAddTempOut_clicked()
 //удаление нижней строки в TempOut
 void StockOutForma::on_pushButtonDelTempOut_clicked()
 {
-    QSqlQuery query;
+    QSqlDatabase dbStock = QSqlDatabase::database("StockDB");
+    QSqlQuery query(dbStock);
     if (!query.exec("DELETE FROM TempOut WHERE Номер = (SELECT MAX(Номер) FROM TempOut LIMIT 1);")){
         qDebug() << "Строка не удалена";
         qDebug() << query.lastError().text();
@@ -130,7 +134,8 @@ void StockOutForma::on_pushButtonDelTempOut_clicked()
 //удаление из Stock на основе данных в TempOut
 void StockOutForma::on_pushButtonOutStock_clicked()
 {
-    QSqlQuery query;
+    QSqlDatabase dbStock = QSqlDatabase::database("StockDB");
+    QSqlQuery query(dbStock);
     //выбираем строки в TempOut того что в наличии
     if (!query.exec("SELECT Номер, Тип, Размер, Количество "
                     "FROM TempOut "
@@ -146,7 +151,7 @@ void StockOutForma::on_pushButtonOutStock_clicked()
         strSize = query.value(rec.indexOf("Размер")).toString();
         numb = query.value(rec.indexOf("Количество")).toInt();
 
-        QSqlQuery q;
+        QSqlQuery q(dbStock);
         QSqlRecord r;
         QString nn;
         int n;
