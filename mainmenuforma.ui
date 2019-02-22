@@ -46,6 +46,11 @@
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
         <widget class="QPushButton" name="pushButtonStock">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Склад</string>
          </property>
@@ -53,6 +58,11 @@
        </item>
        <item row="1" column="0">
         <widget class="QPushButton" name="pushButtonCost">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Расценки</string>
          </property>
@@ -60,6 +70,11 @@
        </item>
        <item row="2" column="0">
         <widget class="QPushButton" name="pushButtonExit">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Выход</string>
          </property>

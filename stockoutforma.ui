@@ -27,41 +27,85 @@
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
         <widget class="QLabel" name="labelOutType">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Тип</string>
          </property>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEditOutType"/>
+        <widget class="QLineEdit" name="lineEditOutType">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+        </widget>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="labelOutSize">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Размер</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="lineEditOutSize"/>
+        <widget class="QLineEdit" name="lineEditOutSize">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+        </widget>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="labelOutNumber">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Количество</string>
          </property>
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEditOutNumber"/>
+        <widget class="QLineEdit" name="lineEditOutNumber">
+         <property name="font">
+          <font>
+           <pointsize>11</pointsize>
+          </font>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
      <item>
-      <widget class="QTableView" name="tableViewOutStock"/>
+      <widget class="QTableView" name="tableViewOutStock">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QLabel" name="labelOutTextCostOfWork">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>Справка</string>
        </property>
@@ -71,6 +115,11 @@
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QPushButton" name="pushButtonAddTempOut">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>К выдаче</string>
          </property>
@@ -78,6 +127,11 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButtonDelTempOut">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Убрать</string>
          </property>
@@ -85,6 +139,11 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButtonOutStock">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Выдать</string>
          </property>
@@ -105,6 +164,11 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButtonStockOutExit">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Назад</string>
          </property>

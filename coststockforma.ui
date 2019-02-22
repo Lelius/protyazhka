@@ -24,12 +24,23 @@
       </widget>
      </item>
      <item>
-      <widget class="QTableView" name="tableViewCostStock"/>
+      <widget class="QTableView" name="tableViewCostStock">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+      </widget>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QPushButton" name="pushButtonNewCostStock">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Новая</string>
          </property>
@@ -37,6 +48,11 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButtonEditCostStock">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Изменить</string>
          </property>
@@ -44,6 +60,11 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButtonDeleteCostStock">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Удалить</string>
          </property>
@@ -64,6 +85,11 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButtonExitCostStockForma">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
           <string>Назад</string>
          </property>
