@@ -73,6 +73,8 @@ void StockInForma::on_pushButtonInNext_clicked()
         MyQSqlQueryModel *model = new MyQSqlQueryModel(this);
         model->setQuery(query);
         ui->tableViewInStock->setModel(model);
+        QHeaderView *headerView = ui->tableViewInStock->horizontalHeader();
+        headerView->setSectionResizeMode(QHeaderView::Stretch);
 
         clearLinesEdit();
     }
@@ -94,6 +96,8 @@ void StockInForma::on_pushButtonInReset_clicked()
     query.exec("SELECT * FROM TempIn;");
     model->setQuery(query);
     ui->tableViewInStock->setModel(model);
+    QHeaderView *headerView = ui->tableViewInStock->horizontalHeader();
+    headerView->setSectionResizeMode(QHeaderView::Stretch);
     clearLinesEdit();
 }
 
@@ -115,6 +119,8 @@ void StockInForma::on_pushButtonInAddStock_clicked()
     MyQSqlQueryModel *model = new MyQSqlQueryModel(this);
     model->setQuery(query);
     ui->tableViewInStock->setModel(model);
+    QHeaderView *headerView = ui->tableViewInStock->horizontalHeader();
+    headerView->setSectionResizeMode(QHeaderView::Stretch);
     emit signalResetModelOnTableView();
 }
 

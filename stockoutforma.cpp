@@ -106,7 +106,8 @@ void StockOutForma::on_pushButtonAddTempOut_clicked()
         MyQSqlQueryModel *model = new MyQSqlQueryModel(this);
         model->setQuery(query);
         ui->tableViewOutStock->setModel(model);
-
+        QHeaderView *headerView = ui->tableViewOutStock->horizontalHeader();
+        headerView->setSectionResizeMode(QHeaderView::Stretch);
         clearLinesEdit();
     }
 }
@@ -128,6 +129,8 @@ void StockOutForma::on_pushButtonDelTempOut_clicked()
     query.exec("SELECT * FROM TempOut;");
     model->setQuery(query);
     ui->tableViewOutStock->setModel(model);
+    QHeaderView *headerView = ui->tableViewOutStock->horizontalHeader();
+    headerView->setSectionResizeMode(QHeaderView::Stretch);
     clearLinesEdit();
 }
 
@@ -191,6 +194,8 @@ void StockOutForma::on_pushButtonOutStock_clicked()
     query.exec("SELECT * FROM TempOut;");
     model->setQuery(query);
     ui->tableViewOutStock->setModel(model);
+    QHeaderView *headerView = ui->tableViewOutStock->horizontalHeader();
+    headerView->setSectionResizeMode(QHeaderView::Stretch);
     //и перезагружаем новую модель Stock
     emit signalResetModelOnTableView();
 }

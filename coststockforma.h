@@ -2,6 +2,8 @@
 #define COSTSTOCKFORMA_H
 
 #include <QWidget>
+#include <QtSql>
+#include "myqsqlquerymodel.h"
 
 namespace Ui {
 class CostStockForma;
@@ -20,6 +22,8 @@ signals:
 
 private slots:
     void on_pushButtonExitCostStockForma_clicked();
+
+    void resetTableViewCostStockModel();
 
 private:
     Ui::CostStockForma *ui;

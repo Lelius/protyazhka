@@ -71,6 +71,8 @@ void StockForma::resetModelOnTableView()
         MyQSqlQueryModel *model = new MyQSqlQueryModel(this);
         model->setQuery(query);
         ui->tableViewStock->setModel(model);
+        QHeaderView *headerView = ui->tableViewStock->horizontalHeader();
+        headerView->setSectionResizeMode(QHeaderView::Stretch);
         return;
     }
     //или с группировкой
@@ -82,6 +84,8 @@ void StockForma::resetModelOnTableView()
     MyQSqlQueryModel *model = new MyQSqlQueryModel(this);
     model->setQuery(query);
     ui->tableViewStock->setModel(model);
+    QHeaderView *headerView = ui->tableViewStock->horizontalHeader();
+    headerView->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 void StockForma::on_pushButtonStockIn_clicked()
