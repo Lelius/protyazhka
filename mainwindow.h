@@ -5,6 +5,7 @@
 #include <QDesktopWidget>
 #include <QApplication>
 #include <QGuiApplication>
+#include <QScreen>
 
 #include "stockforma.h"
 #include "mainmenuforma.h"

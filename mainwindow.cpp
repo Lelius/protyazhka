@@ -8,8 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     //Делаем окно в два раза меньше разрешения рабочего стола
-    QDesktopWidget *desktop = QApplication::desktop();
-    QRect rect = desktop->screenGeometry(desktop->primaryScreen());
+    QScreen *scr = QGuiApplication::primaryScreen();
+    QRect rect = scr->geometry();
     MainWindow::resize(rect.width()/2, rect.height()/2);
 
     //Инициализируем виджеты-формы для QStackedWidget
